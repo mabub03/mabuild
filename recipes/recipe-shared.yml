@@ -52,8 +52,6 @@ modules:
         - ananicy-cpp
         - cachyos-ananicy-rules
         - scx-scheds
-        - openrazer-meta
-        - polychromatic
     remove:
       auto-remove: true
       packages:
@@ -64,6 +62,22 @@ modules:
         - fedora-bookmarks
         - nano
         - vim
+
+  # need to explicitly install kernel-devel before openrazer
+  - type: dnf
+    install:
+      packages:
+        - kernel-devel
+
+  - type: dnf
+    repos:
+      cleanup: true
+      files:
+        - https://openrazer.github.io/hardware:razer.repo
+    install:
+      packages:
+        - openrazer-meta
+        - polychromatic
 
   - type: fonts
     fonts:
