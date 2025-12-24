@@ -15,6 +15,11 @@ modules:
   #         - gstreamer1-plugins-bad
   #         - gstreamer1-plugins-ugly
 
+  - type: akmods
+    install:
+      - openrazer
+      - v4l2loopback
+
   - type: dnf
     repos:
       cleanup: true
@@ -64,10 +69,10 @@ modules:
         - vim
 
   # need to explicitly install kernel-devel before openrazer
-  - type: dnf
-    install:
-      packages:
-        - kernel-devel
+  # - type: dnf
+  #   install:
+  #     packages:
+  #       - kernel-devel
 
   - type: dnf
     repos:
@@ -127,11 +132,6 @@ modules:
       enabled:
         - distrobox-upgrade-automatic.timer
         - flatpak-user-update.timer
-
-  - type: akmods
-    install:
-      - openrazer
-      - v4l2loopback
 
   - type: script
     scripts:
