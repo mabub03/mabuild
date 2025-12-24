@@ -4,25 +4,6 @@ modules:
       - source: system
         destination: /
 
-  - type: systemd
-    system:
-      enabled:
-        - ananicy-cpp.service
-        - minfree.service
-        - cosmic_screenshot_organizer.service
-        - scx.service
-      masked:
-        - flatpak-add-fedora-repos.service
-    user:
-      enabled:
-        - distrobox-upgrade-automatic.timer
-        - flatpak-user-update.timer
-
-  - type: akmods
-    install:
-      - openrazer
-      - v4l2loopback
-
   # install the gstreamer non free codecs that the bluebuild base image doen't do since cosmic player uses gstreamer
   - type: dnf
     repos:
@@ -116,6 +97,25 @@ modules:
           name: cosmic
           title: COSMIC
           url: https://apt.pop-os.org/cosmic/cosmic.flatpakrepo
+
+  - type: systemd
+    system:
+      enabled:
+        - ananicy-cpp.service
+        - minfree.service
+        - cosmic_screenshot_organizer.service
+        - scx.service
+      masked:
+        - flatpak-add-fedora-repos.service
+    user:
+      enabled:
+        - distrobox-upgrade-automatic.timer
+        - flatpak-user-update.timer
+
+  - type: akmods
+    install:
+      - openrazer
+      - v4l2loopback
 
   - type: script
     scripts:
