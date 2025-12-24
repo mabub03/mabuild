@@ -44,9 +44,8 @@ modules:
         - micro
         - podman-compose
         - steam-devices
-        - v4l2loopback
+        #- v4l2loopback
         - inotify-tools # can remove when don't need cosmic screenshot organizer
-        - 7zip
         - unrar
         - yaru-icon-theme
         - brave-browser # better as native due to flatpak makes the chromium sandbox weaker
