@@ -1,0 +1,11 @@
+[Unit]
+Description=Automatically add main user to plugdev group for OpenRazer
+After=multi-user.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/add-user-to-plugdev.sh
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target
