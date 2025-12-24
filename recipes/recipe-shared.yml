@@ -5,20 +5,21 @@ modules:
         destination: /
 
   # install the gstreamer non free codecs that the bluebuild base image doen't do since cosmic player uses gstreamer
-  - type: dnf
-    repos:
-      nonfree: negativo17
-    replace:
-      - from-repo: fedora-multimedia
-        skip-unavailable: true
-        packages:
-          - gstreamer1-plugins-bad
-          - gstreamer1-plugins-ugly
+  # - type: dnf
+  #   repos:
+  #     nonfree: negativo17
+  #   replace:
+  #     - from-repo: fedora-multimedia
+  #       skip-unavailable: true
+  #       packages:
+  #         - gstreamer1-plugins-bad
+  #         - gstreamer1-plugins-ugly
 
   - type: dnf
     repos:
       cleanup: true
       files:
+        - https://negativo17.org/repos/fedora-multimedia.repo
         - https://openrazer.github.io/hardware:razer.repo
         - https://brave-browser-rpm-release.s3.brave.com/brave-browser.repo
       copr:
@@ -26,6 +27,8 @@ modules:
         - alternateved/eza
     install:
       packages:
+        - gstreamer1-plugins-bad
+        - gstreamer1-plugins-ugly
         - fish
         - sudo-rs
         - du-dust
