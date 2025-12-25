@@ -67,7 +67,7 @@ modules:
   - type: dnf
     install:
       packages:
-        - kernel-devel-$(uname -r)
+        - kernel-devel
 
   - type: dnf
     repos:
