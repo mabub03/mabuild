@@ -70,7 +70,7 @@ modules:
   - type: fonts
     fonts:
       nerd-fonts:
-        - BlexMono
+        - IBMPlexMono
       google-fonts:
         - IBM Plex Sans
         - IBM Plex Sans KR
