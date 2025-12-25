@@ -61,3 +61,4 @@ _register_uutils_aliases
 # --- Interactive tooling -----------------------------------------------------
 _eval_if_available fzf --bash
 _eval_if_available zoxide init bash --cmd cd
+export PS1="\[\e[32m\]\u@\h \[\e[34m\]\w \$ \[\e[0m\]"
