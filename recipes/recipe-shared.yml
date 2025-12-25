@@ -72,10 +72,10 @@ modules:
     repos:
       nonfree: rpmfusion
 
-  - type: akmods
-    base: main
-    install:
-      - v4l2loopback
+  # - type: akmods
+  #   base: main
+  #   install:
+  #     - v4l2loopback
 
   - type: dnf
     install:
