@@ -1,36 +1,49 @@
 #!/usr/bin/env fish
-# yoinked from https://gitlab.com/origami-linux/
+# taken from https://gitlab.com/origami-linux/ as a base
+# TODO: need to figure out what removing from here in previous commits caused -v-v-v-v-v-v-v-v to start showing up before prompts
+
+# --- Fish Shell --------------------------------------------------------------
+
 # --- Environment guard -------------------------------------------------------
 if set -q DISTROBOX_ENTER_PATH
     return
 end
 
-# --- Modern replacements -----------------------------------------------------
-alias vim nvim
-alias docker podman
-alias docker-compose podman-compose
-alias cat bat
-alias sudo 'sudo-rs '
-alias su su-rs
+# Disable welcome message
+set -g fish_greeting ""
 
-# --- Directory listings via eza ----------------------------------------------
-alias la 'eza -la --icons'
-alias lt 'eza --tree --level=2 --icons'
-function ls
-    command eza --icons $argv
+# Start in home path
+if status is-interactive
+    cd $HOME
+
+    # --- Modern replacements -----------------------------------------------------
+    alias vim nvim
+    alias update topgrade
+    alias docker podman
+    alias docker-compose podman-compose
+    alias cat bat
+    alias sudo 'sudo-rs '
+    alias su su-rs
+
+    # --- Directory listings via eza ----------------------------------------------
+    alias la 'eza -la --icons'
+    alias lt 'eza --tree --level=2 --icons'
+    function ls
+        command eza --icons $argv
+    end
+    function ll
+        command eza -l --icons $argv
+    end
+
+    # --- Interactive tooling -----------------------------------------------------
+    fzf --fish | source
+    zoxide init fish | source
+    starship init fish | source
+
 end
-function ll
-    command eza -l --icons $argv
-end
 
-# --- Interactive tooling -----------------------------------------------------
-fzf --fish | source
-zoxide init fish | source
-starship init fish | source
-
-# --- Cleanup (remove the old commands that aren't needed) -----------------------------------------------------------------
-# (TODO: look at which of these I need to remove as most of these are nags which I removed)
-# functions -e grep find tmux ls ll nano git ps du
+# --- Cleanup -----------------------------------------------------------------
+functions -e grep find tmux ls ll nano git ps du
 
 # --- Helper utilities --------------------------------------------------------
 function _command_exists
@@ -48,6 +61,35 @@ function _eval_if_available
     end
 end
 
+function _should_nag
+    # Only "nag" in a real, interactive terminal run of the command
+    #
+    # - status is-interactive: we're in an interactive shell
+    # - test -t 1: stdout is a TTY (completions run the command with
+    #   stdout/stderr redirected to pipes, so this will be false there)
+    # - skip when user explicitly asks for --help
+    if status is-interactive
+        if test -t 1
+            if not string match -q -- --help $argv
+                return 0 # True
+            end
+        end
+    end
+    return 1 # False
+end
+
+function _nag_and_exec
+    set tip "$argv[1]"
+    set -e argv[1]
+    set target "$argv[1]"
+    set -e argv[1]
+    if _should_nag
+        printf '%s\n' "$tip" >&2
+    end
+    # Expand $argv as separate arguments (don't quote) so the target command receives them correctly
+    command "$target" $argv
+end
+
 # --- uutils-coreutils shims --------------------------------------------------
 function _register_uutils_aliases
     for uu_bin in /usr/bin/uu_*
@@ -63,3 +105,39 @@ function _register_uutils_aliases
     end
 end
 _register_uutils_aliases
+
+# --- Friendly migration nags -------------------------------------------------
+function _tmux_nag
+    _nag_and_exec '🌀 Tip: Try using "zellij or byobu" for a modern multiplexing experience.' tmux $argv
+end
+alias tmux _tmux_nag
+
+function _find_nag
+    _nag_and_exec '🧭 Tip: Try using "fd" next time for a simpler and faster search.' find $argv
+end
+alias find _find_nag
+
+function _grep_nag
+    _nag_and_exec '🔍 Tip: Try using "rg" for a simpler and faster search.' grep $argv
+end
+alias grep _grep_nag
+
+function _nano_nag
+    _nag_and_exec '📝 Tip: Give "micro" a try for a friendlier terminal editor.' nano $argv
+end
+alias nano _nano_nag
+
+function _git_nag
+    _nag_and_exec '🐙 Tip: Try "lazygit" for a slick TUI when working with git.' git $argv
+end
+alias git _git_nag
+
+function _ps_nag
+    _nag_and_exec '🧾 Tip: "procs" offers a richer, colorful process viewer than ps.' ps $argv
+end
+alias ps _ps_nag
+
+function _du_nag
+    _nag_and_exec '🌬️ Tip: "dust" makes disk usage checks faster and easier than du.' du $argv
+end
+alias du _du_nag

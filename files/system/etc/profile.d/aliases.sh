@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
-# yoinked from https://gitlab.com/origami-linux/
+# taken from https://gitlab.com/origami-linux/ as a base
+# TODO: need to figure out what removing from here in previous commits caused -v-v-v-v-v-v-v-v to start showing up before prompts
 
 # --- Environment guard -------------------------------------------------------
 if [ -n "$DISTROBOX_ENTER_PATH" ]; then
@@ -8,8 +9,7 @@ fi
 
 # --- Cleanup -----------------------------------------------------------------
 # Initial cleanup (good practice, but we will strictly unalias below too)
-# # (TODO: look at which of these I need to remove as most of these are nags which I removed)
-#unset -f grep find tmux ls ll nano git ps du 2>/dev/null
+unset -f grep find tmux ls ll nano git ps du 2>/dev/null
 unalias ls 2>/dev/null
 unalias ll 2>/dev/null
 
@@ -26,6 +26,36 @@ _eval_if_available() {
     fi
 }
 
+_should_nag() {
+    # 1. Don't nag during completion (COMP_LINE check)
+    # 2. Don't nag if stderr isn't a TTY
+    if [ ! -t 2 ] || [ -n "$COMP_LINE" ]; then
+        return 1
+    fi
+
+    # 3. Don't nag if the user is asking for --help
+    for arg in "$@"; do
+        if [ "$arg" = "--help" ]; then
+            return 1
+        fi
+    done
+
+    return 0
+}
+
+_nag_and_exec() {
+    local tip="$1"
+    shift
+    local target="$1"
+    shift
+
+    # Pass remaining arguments to _should_nag to check for flags
+    if _should_nag "$@"; then
+        printf '%s\n' "$tip" >&2
+    fi
+    command "$target" "$@"
+}
+
 # --- Modern replacements -----------------------------------------------------
 alias vim='nvim'
 alias update='topgrade'
@@ -36,37 +66,60 @@ alias sudo='sudo-rs '
 alias su='su-rs'
 
 # --- Directory listings via eza ----------------------------------------------
-alias la='eza -la --icons=auto'
-alias lt='eza --tree --level=2 --icons=auto'
-alias ls='eza --icons=auto'
-alias ll='eza -l --icons=auto'
-#ls() { command eza --icons "$@"; }
-#ll() { command eza -l --icons "$@"; }
-
-# --- uutils-coreutils shims --------------------------------------------------
-_register_uutils_aliases() {
-    local uu_bin base_cmd std_cmd
-    # Look for the uutils binaries
-    for uu_bin in /usr/bin/uu_*; do
-        [ -e "$uu_bin" ] || continue
-
-        # FIX: Use Bash built-in parameter expansion instead of 'basename'
-        # ${uu_bin##*/} removes everything up to the last slash
-        base_cmd="${uu_bin##*/}"
-
-        # std_cmd removes the 'uu_' prefix
-        std_cmd="${base_cmd#uu_}"
-
-        case "$std_cmd" in
-            ls | cat | '[' | test | basename) continue ;;
-        esac
-
-        alias "$std_cmd"="$base_cmd"
-    done
-}
-_register_uutils_aliases
+alias la='eza -la --icons'
+alias lt='eza --tree --level=2 --icons'
+ls() { command eza --icons "$@"; }
+ll() { command eza -l --icons "$@"; }
 
 # --- Interactive tooling -----------------------------------------------------
 _eval_if_available fzf --bash
 _eval_if_available starship init bash
 _eval_if_available zoxide init bash --cmd cd
+
+# --- uutils-coreutils shims --------------------------------------------------
+_register_uutils_aliases() {
+    local uu_bin base_cmd std_cmd
+    for uu_bin in /usr/bin/uu_*; do
+        [ -e "$uu_bin" ] || continue
+        base_cmd=$(basename "$uu_bin")
+        std_cmd="${base_cmd#uu_}"
+        case "$std_cmd" in
+        ls | cat | '[' | test) continue ;;
+        esac
+        alias "$std_cmd"="$base_cmd"
+    done
+}
+_register_uutils_aliases
+
+# --- Friendly migration nags -------------------------------------------------
+# We must unalias these first to prevent 'syntax error' if they are already
+# aliased elsewhere (e.g. grep='grep --color').
+unalias tmux find grep nano git ps du 2>/dev/null
+
+tmux() {
+    _nag_and_exec '🌀 Tip: Try using "zellij or byobu" for a modern multiplexing experience.' tmux "$@"
+}
+
+find() {
+    _nag_and_exec '🧭 Tip: Try using "fd" next time for a simpler and faster search.' find "$@"
+}
+
+grep() {
+    _nag_and_exec '🔍 Tip: Try using "rg" for a simpler and faster search.' grep "$@"
+}
+
+nano() {
+    _nag_and_exec '📝 Tip: Give "micro" a try for a friendlier terminal editor.' nano "$@"
+}
+
+git() {
+    _nag_and_exec '🐙 Tip: Try "lazygit" for a slick TUI when working with git.' git "$@"
+}
+
+ps() {
+    _nag_and_exec '🧾 Tip: "procs" offers a richer, colorful process viewer than ps.' ps "$@"
+}
+
+du() {
+    _nag_and_exec '🌬️ Tip: "dust" makes disk usage checks faster and easier than du.' du "$@"
+}
