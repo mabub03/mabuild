@@ -68,22 +68,20 @@ modules:
   #     packages:
   #       - kernel-devel
 
+  - type: akmods
+    base: main
+    install:
+      - openrazer
+
   - type: dnf
     repos:
       files:
         - https://openrazer.github.io/hardware:razer.repo
-
-  - type: dnf
     install:
       packages:
         - openrazer-daemon
         - python3-openrazer
         - polychromatic
-
-  - type: akmods
-    base: main
-    install:
-      - openrazer
 
   # - type: fonts
   #   fonts:
