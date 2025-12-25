@@ -14,6 +14,7 @@ modules:
         - atim/starship
         - bieszczaders/kernel-cachyos-addons
         - alternateved/eza
+        - dejan/lazygit
     install:
       packages:
         - gstreamer1-plugins-bad
@@ -27,6 +28,7 @@ modules:
         - bat
         - zoxide
         - btop
+        - lazygit
         - fastfetch
         - ripgrep
         - uutils-coreutils
