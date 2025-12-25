@@ -71,17 +71,25 @@ modules:
   - type: akmods
     base: main
     install:
-      - openrazer
+      - v4l2loopback
 
   - type: dnf
     repos:
       files:
-        - https://openrazer.github.io/hardware:razer.repo
+        - https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-43.noarch.rpm
     install:
       packages:
-        - openrazer-daemon
-        - python3-openrazer
-        - polychromatic
+        - v4l2loopback
+
+  # - type: dnf
+  #   repos:
+  #     files:
+  #       - https://openrazer.github.io/hardware:razer.repo
+  #   install:
+  #     packages:
+  #       - openrazer-daemon
+  #       - python3-openrazer
+  #       - polychromatic
 
   # - type: fonts
   #   fonts:
