@@ -68,15 +68,17 @@ modules:
   #     packages:
   #       - kernel-devel
 
+  - type: dnf
+    repos:
+      files:
+        - https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-43.noarch.rpm
+
   - type: akmods
     base: main
     install:
       - v4l2loopback
 
   - type: dnf
-    repos:
-      files:
-        - https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-43.noarch.rpm
     install:
       packages:
         - v4l2loopback
