@@ -69,9 +69,8 @@ modules:
   #       - kernel-devel
 
   - type: dnf
-    repos:
-      files:
-        - https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-43.noarch.rpm
+    install:
+      - https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-43.noarch.rpm
 
   - type: akmods
     base: main
