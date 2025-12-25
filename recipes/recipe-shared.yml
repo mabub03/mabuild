@@ -4,149 +4,118 @@ modules:
       - source: system
         destination: /
 
-  # install the gstreamer non free codecs that the bluebuild base image doen't do since cosmic player uses gstreamer
-  # - type: dnf
-  #   repos:
-  #     nonfree: negativo17
-  #   replace:
-  #     - from-repo: fedora-multimedia
-  #       skip-unavailable: true
-  #       packages:
-  #         - gstreamer1-plugins-bad
-  #         - gstreamer1-plugins-ugly
-
-  # - type: dnf
-  #   repos:
-  #     cleanup: true
-  #     files:
-  #       - https://negativo17.org/repos/fedora-multimedia.repo
-  #       - https://brave-browser-rpm-release.s3.brave.com/brave-browser.repo
-  #     copr:
-  #       - bieszczaders/kernel-cachyos-addons
-  #       - alternateved/eza
-  #   install:
-  #     packages:
-  #       - gstreamer1-plugins-bad
-  #       - gstreamer1-plugins-ugly
-  #       - fish
-  #       - sudo-rs
-  #       - du-dust
-  #       - tealdeer
-  #       - procs
-  #       - eza
-  #       - bat
-  #       - zoxide
-  #       - btop
-  #       - fastfetch
-  #       - ripgrep
-  #       - uutils-coreutils
-  #       - micro
-  #       - podman-compose
-  #       - steam-devices
-  #       #- v4l2loopback
-  #       - inotify-tools # can remove when don't need cosmic screenshot organizer
-  #       - unrar
-  #       - yaru-icon-theme
-  #       - brave-browser # better as native due to flatpak makes the chromium sandbox weaker
-  #       - ananicy-cpp
-  #       - cachyos-ananicy-rules
-  #       - scx-scheds
-  #   remove:
-  #     auto-remove: true
-  #     packages:
-  #       - ark
-  #       - htop
-  #       - toolbox
-  #       - gnome-system-monitor
-  #       - fedora-bookmarks
-  #       - nano
-  #       - vim
-
-  #need to explicitly install kernel-devel before openrazer
-  # - type: dnf
-  #   install:
-  #     packages:
-  #       - kernel-devel
-
   - type: dnf
     repos:
-      nonfree: rpmfusion
-
-  # - type: akmods
-  #   base: main
-  #   install:
-  #     - v4l2loopback
-
-  - type: dnf
+      cleanup: true
+      files:
+        - https://negativo17.org/repos/fedora-multimedia.repo
+        - https://brave-browser-rpm-release.s3.brave.com/brave-browser.repo
+      copr:
+        - bieszczaders/kernel-cachyos-addons
+        - alternateved/eza
     install:
       packages:
-        - v4l2loopback
+        - gstreamer1-plugins-bad
+        - gstreamer1-plugins-ugly
+        - fish
+        - sudo-rs
+        - du-dust
+        - tealdeer
+        - procs
+        - eza
+        - bat
+        - zoxide
+        - btop
+        - fastfetch
+        - ripgrep
+        - uutils-coreutils
+        - micro
+        - podman-compose
+        - steam-devices
+        - inotify-tools # can remove when don't need cosmic screenshot organizer
+        - unrar
+        - yaru-icon-theme
+        - brave-browser # better as native due to flatpak makes the chromium sandbox weaker
+        - ananicy-cpp
+        - cachyos-ananicy-rules
+        - scx-scheds
+    remove:
+      auto-remove: true
+      packages:
+        - ark
+        - htop
+        - toolbox
+        - gnome-system-monitor
+        - fedora-bookmarks
+        - nano
+        - vim
 
   # - type: dnf
   #   repos:
   #     files:
   #       - https://openrazer.github.io/hardware:razer.repo
+
+  # - type: akmods
+  #   base: main
+  #   install:
+  #     - openrazer
+
+  # - type: dnf
   #   install:
   #     packages:
   #       - openrazer-daemon
   #       - python3-openrazer
   #       - polychromatic
 
-  # - type: fonts
-  #   fonts:
-  #     nerd-fonts:
-  #       - BlexMono
-  #     google-fonts:
-  #       - IBM Plex Sans
-  #       - IBM Plex Sans KR
-  #       - IBM Plex Sans JP
-  #       - IBM Plex Mono
-  #       - IBM Plex Serif
-  #       - Arimo # metrically compatible with: Arial & Helvetica
-  #       - Tinos # metrically compatible with: Times New Roman & Times
-  #       - Cousine # metrically compatible with: Courier New & Courier
-  #       - Caladea # metrically compatible with: Cambria
-  #       - Carlito # metrically compatible with: Calibri
-  #     url-fonts:
-  #       - name: IBM Plex Sans SC
-  #         url: https://github.com/IBM/plex/releases/download/%40ibm%2Fplex-sans-sc%401.1.0/ibm-plex-sans-sc.zip
-  #       - name: IBM Plex Sans TC
-  #         url: https://github.com/IBM/plex/releases/download/%40ibm%2Fplex-sans-tc%401.1.1/ibm-plex-sans-tc.zip
+  - type: fonts
+    fonts:
+      nerd-fonts:
+        - BlexMono
+      google-fonts:
+        - IBM Plex Sans
+        - IBM Plex Sans KR
+        - IBM Plex Sans JP
+        - IBM Plex Mono
+        - IBM Plex Serif
+        - Arimo # metrically compatible with: Arial & Helvetica
+        - Tinos # metrically compatible with: Times New Roman & Times
+        - Cousine # metrically compatible with: Courier New & Courier
+        - Caladea # metrically compatible with: Cambria
+        - Carlito # metrically compatible with: Calibri
+      url-fonts:
+        - name: IBM Plex Sans SC
+          url: https://github.com/IBM/plex/releases/download/%40ibm%2Fplex-sans-sc%401.1.0/ibm-plex-sans-sc.zip
+        - name: IBM Plex Sans TC
+          url: https://github.com/IBM/plex/releases/download/%40ibm%2Fplex-sans-tc%401.1.1/ibm-plex-sans-tc.zip
 
-  # - type: default-flatpaks
-  #   configurations:
-  #     - notify: false
-  #       scope: user
-  #       repo:
-  #         name: flathub
-  #         title: Flathub
-  #     - notify: false
-  #       scope: user
-  #       repo:
-  #         name: cosmic
-  #         title: COSMIC
-  #         url: https://apt.pop-os.org/cosmic/cosmic.flatpakrepo
+  - type: default-flatpaks
+    configurations:
+      - notify: false
+        scope: user
+        repo:
+          name: flathub
+          title: Flathub
+      - notify: false
+        scope: user
+        repo:
+          name: cosmic
+          title: COSMIC
+          url: https://apt.pop-os.org/cosmic/cosmic.flatpakrepo
 
-  # - type: akmods
-  #   base: main
-  #   install:
-  #     - openrazer
-  #- v4l2loopback
+  - type: systemd
+    system:
+      enabled:
+        - ananicy-cpp.service
+        - minfree.service
+        - cosmic_screenshot_organizer.service
+        - scx.service
+      masked:
+        - flatpak-add-fedora-repos.service
+    user:
+      enabled:
+        - distrobox-upgrade-automatic.timer
+        - flatpak-user-update.timer
 
-  # - type: systemd
-  #   system:
-  #     enabled:
-  #       - ananicy-cpp.service
-  #       - minfree.service
-  #       - cosmic_screenshot_organizer.service
-  #       - scx.service
-  #     masked:
-  #       - flatpak-add-fedora-repos.service
-  #   user:
-  #     enabled:
-  #       - distrobox-upgrade-automatic.timer
-  #       - flatpak-user-update.timer
-
-  # - type: script
-  #   scripts:
-  #     - cleanup.sh
+  - type: script
+    scripts:
+      - cleanup.sh
