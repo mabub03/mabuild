@@ -13,6 +13,11 @@ image-version: latest
 modules:
   - from-file: recipe-shared.yml
 
+  - type: script
+    snippets:
+      - "rm /etc/profile.d/aliases.sh"
+      - "rm /etc/fish/conf.d/aliases.fish"
+
   - type: initramfs
 
   - type: signing # this sets up the proper policy & signing files for signed images to work fully
