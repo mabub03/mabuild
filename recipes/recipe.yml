@@ -13,9 +13,9 @@ image-version: latest
 modules:
   - from-file: recipe-shared.yml
 
-  - type: script
-    snippets:
-      - "rm /etc/fish/conf.d/aliases.fish"
+  # - type: script
+  #   snippets:
+  #     - "rm /etc/fish/conf.d/aliases.fish"
 
   - type: initramfs
 

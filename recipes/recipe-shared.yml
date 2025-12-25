@@ -15,8 +15,10 @@ modules:
         - bieszczaders/kernel-cachyos-addons
         - alternateved/eza
         - dejan/lazygit
+        - ublue-os/packages
     install:
       packages:
+        - uupd
         - gstreamer1-plugins-bad
         - gstreamer1-plugins-ugly
         - fish
@@ -114,14 +116,15 @@ modules:
         - minfree.service
         - cosmic_screenshot_organizer.service
         - scx_loader.service
+        - uupd.timer
       masked:
         - flatpak-add-fedora-repos.service
-    user:
-      enabled:
-        - distrobox-upgrade-automatic.timer
-        - flatpak-user-update.timer
+    # user:
+    #   enabled:
+    #     - distrobox-upgrade-automatic.timer
+    #     - flatpak-user-update.timer
 
   - type: script
     scripts:
-      - cleanup.sh
       - font_rendering_symlinks.sh
+      - cleanup.sh
