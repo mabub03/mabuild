@@ -36,14 +36,12 @@ alias sudo='sudo-rs '
 alias su='su-rs'
 
 # --- Directory listings via eza ----------------------------------------------
-alias la='eza -la --icons'
-alias lt='eza --tree --level=2 --icons'
-ls() { command eza --icons "$@"; }
-ll() { command eza -l --icons "$@"; }
-
-# --- Interactive tooling -----------------------------------------------------
-_eval_if_available fzf --bash
-_eval_if_available zoxide init bash --cmd cd
+alias la='eza -la --icons=auto'
+alias lt='eza --tree --level=2 --icons=auto'
+alias ls='eza --icons=auto'
+alias ll='eza -l --icons=auto'
+#ls() { command eza --icons "$@"; }
+#ll() { command eza -l --icons "$@"; }
 
 # --- uutils-coreutils shims --------------------------------------------------
 _register_uutils_aliases() {
@@ -59,3 +57,7 @@ _register_uutils_aliases() {
     done
 }
 _register_uutils_aliases
+
+# --- Interactive tooling -----------------------------------------------------
+_eval_if_available fzf --bash
+_eval_if_available zoxide init bash --cmd cd

@@ -15,7 +15,6 @@ modules:
 
   - type: script
     snippets:
-      - "rm /etc/profile.d/aliases.sh"
       - "rm /etc/fish/conf.d/aliases.fish"
 
   - type: initramfs
