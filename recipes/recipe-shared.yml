@@ -39,6 +39,7 @@ modules:
         - ananicy-cpp
         - cachyos-ananicy-rules
         - scx-scheds
+        - scx-manager
     remove:
       auto-remove: true
       packages:
@@ -108,7 +109,7 @@ modules:
         - ananicy-cpp.service
         - minfree.service
         - cosmic_screenshot_organizer.service
-        - scx.service
+        - scx_loader.service
       masked:
         - flatpak-add-fedora-repos.service
     user:
