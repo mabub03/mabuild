@@ -20,7 +20,6 @@ modules:
       cleanup: true
       files:
         - https://negativo17.org/repos/fedora-multimedia.repo
-        - https://openrazer.github.io/hardware:razer.repo
         - https://brave-browser-rpm-release.s3.brave.com/brave-browser.repo
       copr:
         - bieszczaders/kernel-cachyos-addons
@@ -64,19 +63,26 @@ modules:
         - vim
 
   #need to explicitly install kernel-devel before openrazer
-  - type: dnf
-    install:
-      packages:
-        - kernel-devel
+  # - type: dnf
+  #   install:
+  #     packages:
+  #       - kernel-devel
 
   - type: dnf
     repos:
-      cleanup: true
       files:
         - https://openrazer.github.io/hardware:razer.repo
+
+  - type: akmods
+    base: main
+    install:
+      - openrazer
+
+  - type: dnf
     install:
       packages:
-        - openrazer-meta
+        - openrazer-daemon
+        - python3-openrazer
         - polychromatic
 
   - type: fonts
@@ -114,11 +120,11 @@ modules:
           title: COSMIC
           url: https://apt.pop-os.org/cosmic/cosmic.flatpakrepo
 
-  - type: akmods
-    base: main
-    install:
-      - openrazer
-      #- v4l2loopback
+  # - type: akmods
+  #   base: main
+  #   install:
+  #     - openrazer
+  #- v4l2loopback
 
   - type: systemd
     system:
