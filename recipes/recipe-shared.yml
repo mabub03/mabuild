@@ -122,4 +122,4 @@ modules:
   - type: script
     scripts:
       - cleanup.sh
-      - font_rendering_symlinks
+      - font_rendering_symlinks.sh
