@@ -15,12 +15,6 @@ modules:
   #         - gstreamer1-plugins-bad
   #         - gstreamer1-plugins-ugly
 
-  - type: akmods
-    base: main
-    install:
-      - openrazer
-      #- v4l2loopback
-
   - type: dnf
     repos:
       cleanup: true
@@ -69,11 +63,11 @@ modules:
         - nano
         - vim
 
-  # need to explicitly install kernel-devel before openrazer
-  # - type: dnf
-  #   install:
-  #     packages:
-  #       - kernel-devel
+  #need to explicitly install kernel-devel before openrazer
+  - type: dnf
+    install:
+      packages:
+        - kernel-devel-$(uname -r)
 
   - type: dnf
     repos:
@@ -119,6 +113,12 @@ modules:
           name: cosmic
           title: COSMIC
           url: https://apt.pop-os.org/cosmic/cosmic.flatpakrepo
+
+  - type: akmods
+    base: main
+    install:
+      - openrazer
+      #- v4l2loopback
 
   - type: systemd
     system:
