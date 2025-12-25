@@ -11,6 +11,7 @@ modules:
         - https://negativo17.org/repos/fedora-multimedia.repo
         - https://brave-browser-rpm-release.s3.brave.com/brave-browser.repo
       copr:
+        - atim/starship
         - bieszczaders/kernel-cachyos-addons
         - alternateved/eza
     install:
@@ -30,6 +31,7 @@ modules:
         - ripgrep
         - uutils-coreutils
         - micro
+        - starship
         - podman-compose
         - steam-devices
         - inotify-tools # can remove when don't need cosmic screenshot organizer
@@ -120,3 +122,4 @@ modules:
   - type: script
     scripts:
       - cleanup.sh
+      - font_rendering_symlinks

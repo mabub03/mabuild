@@ -26,6 +26,7 @@ end
 # --- Interactive tooling -----------------------------------------------------
 fzf --fish | source
 zoxide init fish | source
+starship init fish | source
 
 # --- Cleanup (remove the old commands that aren't needed) -----------------------------------------------------------------
 # (TODO: look at which of these I need to remove as most of these are nags which I removed)

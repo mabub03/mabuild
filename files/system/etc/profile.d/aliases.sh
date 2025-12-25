@@ -68,4 +68,5 @@ _register_uutils_aliases
 
 # --- Interactive tooling -----------------------------------------------------
 _eval_if_available fzf --bash
+_eval_if_available starship init bash
 _eval_if_available zoxide init bash --cmd cd
