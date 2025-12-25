@@ -46,13 +46,21 @@ alias ll='eza -l --icons=auto'
 # --- uutils-coreutils shims --------------------------------------------------
 _register_uutils_aliases() {
     local uu_bin base_cmd std_cmd
+    # Look for the uutils binaries
     for uu_bin in /usr/bin/uu_*; do
         [ -e "$uu_bin" ] || continue
-        base_cmd=$(basename "$uu_bin")
+
+        # FIX: Use Bash built-in parameter expansion instead of 'basename'
+        # ${uu_bin##*/} removes everything up to the last slash
+        base_cmd="${uu_bin##*/}"
+
+        # std_cmd removes the 'uu_' prefix
         std_cmd="${base_cmd#uu_}"
+
         case "$std_cmd" in
-        ls | cat | '[' | test) continue ;;
+            ls | cat | '[' | test | basename) continue ;;
         esac
+
         alias "$std_cmd"="$base_cmd"
     done
 }
@@ -61,4 +69,3 @@ _register_uutils_aliases
 # --- Interactive tooling -----------------------------------------------------
 _eval_if_available fzf --bash
 _eval_if_available zoxide init bash --cmd cd
-export PS1="\[\e[32m\]\u@\h \[\e[34m\]\w \$ \[\e[0m\]"
