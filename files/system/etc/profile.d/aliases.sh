@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 # taken from https://gitlab.com/origami-linux/ as a base
-# TODO: need to figure out what removing from here in previous commits caused -v-v-v-v-v-v-v-v to start showing up before prompts
 
 # --- Environment guard -------------------------------------------------------
 if [ -n "$DISTROBOX_ENTER_PATH" ]; then
@@ -110,6 +109,7 @@ alias ps='procs'
 alias du='dust'
 alias grep='rg'
 alias find='fd'
+alias ujust='blujust'
 
 # --- Friendly migration nags -------------------------------------------------
 # We must unalias these first to prevent 'syntax error' if they are already

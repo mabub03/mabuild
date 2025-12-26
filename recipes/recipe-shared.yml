@@ -102,6 +102,23 @@ modules:
         repo:
           name: flathub
           title: Flathub
+        install:
+          - org.gnome.Loupe
+          - org.gnome.Papers
+          - org.gnome.font-viewer
+          - com.dec05eba.gpu_screen_recorder
+          - org.gtk.Gtk3theme.adw-gtk3
+          - org.gtk.Gtk3theme.adw-gtk3-dark
+          - com.spotify.Client
+          - com.github.tchx84.Flatseal
+          - io.missioncenter.MissionCenter
+          - io.github.nozwock.Packet
+          - dev.edfloreshz.CosmicTweaks
+          - com.github.neithern.g4music
+          - com.github.PintaProject.Pinta
+          - com.discordapp.Discord
+          - com.github.johnfactotum.Foliate
+          - org.freedesktop.Platform.ffmpeg-full
       - notify: false
         scope: user
         repo:

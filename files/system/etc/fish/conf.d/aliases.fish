@@ -1,6 +1,5 @@
 #!/usr/bin/env fish
 # taken from https://gitlab.com/origami-linux/ as a base
-# TODO: need to figure out what removing from here in previous commits caused -v-v-v-v-v-v-v-v to start showing up before prompts
 
 # --- Environment guard -------------------------------------------------------
 if set -q DISTROBOX_ENTER_PATH
@@ -58,6 +57,7 @@ alias ps procs
 alias du dust
 alias grep rg
 alias find fd
+alias ujust blujust
 
 # --- Directory listings via eza ----------------------------------------------
 alias la 'eza -la --icons'
