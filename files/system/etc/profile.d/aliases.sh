@@ -2,9 +2,9 @@
 # taken from https://gitlab.com/origami-linux/ as a base
 
 # --- Environment guard -------------------------------------------------------
-if [ -n "$DISTROBOX_ENTER_PATH" ]; then
-    return
-fi
+# if [ -n "$DISTROBOX_ENTER_PATH" ]; then
+#     return
+# fi
 
 # --- Cleanup -----------------------------------------------------------------
 # Initial cleanup (good practice, but we will strictly unalias below too)

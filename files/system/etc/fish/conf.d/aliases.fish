@@ -2,14 +2,9 @@
 # taken from https://gitlab.com/origami-linux/ as a base
 
 # --- Environment guard -------------------------------------------------------
-if set -q DISTROBOX_ENTER_PATH
-    return
-end
-
-# this is to prevent terminal prompt from showing you are at /var/home/<user> due to how silverblue works
-if status is-interactive
-    cd $HOME
-end
+# if set -q DISTROBOX_ENTER_PATH
+#     return
+# end
 
 # Disable welcome message
 set -g fish_greeting ""
