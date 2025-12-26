@@ -6,6 +6,11 @@ if set -q DISTROBOX_ENTER_PATH
     return
 end
 
+# this is to prevent terminal prompt from showing you are at /var/home/<user> due to how silverblue works
+if status is-interactive
+    cd $HOME
+end
+
 # Disable welcome message
 set -g fish_greeting ""
 
@@ -134,3 +139,8 @@ end
 fzf --fish | source
 zoxide init fish | source
 starship init fish | source
+
+# this is to prevent terminal prompt from showing you are at /var/home/<user> due to how silverblue works
+if status is-interactive
+    cd $HOME
+end

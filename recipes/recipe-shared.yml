@@ -119,6 +119,9 @@ modules:
           - com.discordapp.Discord
           - com.github.johnfactotum.Foliate
           - org.freedesktop.Platform.ffmpeg-full
+
+  - type: default-flatpaks
+    configurations:
       - notify: false
         scope: user
         repo:
