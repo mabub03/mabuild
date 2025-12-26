@@ -131,13 +131,13 @@ modules:
       enabled:
         - ananicy-cpp.service
         - minfree.service
-        - cosmic_screenshot_organizer.service
         - scx_loader.service
         - uupd.timer
       masked:
         - flatpak-add-fedora-repos.service
-    # user:
-    #   enabled:
+    user:
+      enabled:
+        - cosmic_screenshot_organizer.service
     #     - distrobox-upgrade-automatic.timer
     #     - flatpak-user-update.timer
 
