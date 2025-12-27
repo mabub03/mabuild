@@ -60,7 +60,7 @@ modules:
   - type: dnf
     repos:
       cleanup: true
-      nonfree: https://raw.githubusercontent.com/terrapkg/subatomic-repos/main/terra.repo
+      files: https://raw.githubusercontent.com/terrapkg/subatomic-repos/main/terra.repo
     install:
       packages:
         - v4l2loopback
