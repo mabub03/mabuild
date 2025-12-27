@@ -57,6 +57,18 @@ modules:
         - nano
         - vim
 
+  - type: akmods
+    base: main
+    install:
+      - v4l2loopback
+
+  - type: dnf
+    repos:
+      cleanup: true
+      nonfree: rpmfusion
+    install:
+      - v4l2loopback
+
   # - type: dnf
   #   repos:
   #     files:
