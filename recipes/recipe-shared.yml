@@ -18,7 +18,6 @@ modules:
         - ublue-os/packages
     install:
       packages:
-        - kernel-devel
         - uupd
         - gstreamer1-plugins-bad
         - gstreamer1-plugins-ugly
@@ -58,18 +57,15 @@ modules:
         - nano
         - vim
 
-  - type: akmods
-    base: main
-    install:
-      - v4l2loopback
-
   - type: dnf
     repos:
       cleanup: true
       nonfree: rpmfusion
+
+  - type: akmods
+    base: main
     install:
-      packages:
-        - v4l2loopback
+      - v4l2loopback
 
   # - type: dnf
   #   repos:
