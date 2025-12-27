@@ -4,6 +4,10 @@ modules:
       - source: system
         destination: /
 
+  - type: kernel-versions
+    versions:
+      - main
+
   - type: dnf
     repos:
       cleanup: true
