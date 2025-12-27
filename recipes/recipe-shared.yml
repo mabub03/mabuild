@@ -67,7 +67,8 @@ modules:
       cleanup: true
       nonfree: rpmfusion
     install:
-      - v4l2loopback
+      packages:
+        - v4l2loopback
 
   # - type: dnf
   #   repos:
