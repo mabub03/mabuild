@@ -18,6 +18,7 @@ modules:
         - ublue-os/packages
     install:
       packages:
+        - kernel-devel
         - uupd
         - gstreamer1-plugins-bad
         - gstreamer1-plugins-ugly
