@@ -57,14 +57,14 @@ modules:
         - nano
         - vim
 
-  - type: dnf
-    repos:
-      cleanup: true
-      files:
-        - https://raw.githubusercontent.com/terrapkg/subatomic-repos/main/terra.repo
-    install:
-      packages:
-        - v4l2loopback
+  # - type: dnf
+  #   repos:
+  #     cleanup: true
+  #     files:
+  #       - https://raw.githubusercontent.com/terrapkg/subatomic-repos/main/terra.repo
+  #   install:
+  #     packages:
+  #       - v4l2loopback
   # - type: akmods
   #   base: main
   #   install:
@@ -159,5 +159,6 @@ modules:
 
   - type: script
     scripts:
+      - v4l2loopback.sh
       - font_rendering_symlinks.sh
       - cleanup.sh
