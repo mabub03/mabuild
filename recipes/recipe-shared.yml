@@ -65,10 +65,11 @@ modules:
   #   install:
   #     packages:
   #       - v4l2loopback
-  # - type: akmods
-  #   base: main
-  #   install:
-  #     - v4l2loopback
+
+  - type: akmods
+    base: main
+    install:
+      - v4l2loopback
 
   # - type: dnf
   #   repos:
@@ -159,6 +160,5 @@ modules:
 
   - type: script
     scripts:
-      - v4l2loopback.sh
       - font_rendering_symlinks.sh
       - cleanup.sh
